@@ -1,0 +1,40 @@
+# 登录模块测试数据
+valid_login:
+  description: "正确的用户名密码"
+  body:
+    username: "admin"
+    password: "admin123"
+  excepted:
+    status_code: 200
+    code: 200
+    msg: "操作成功"
+    has_token: true
+
+invalid_password:
+  description: "错误的密码"
+  body:
+    username: "admin"
+    password: "admin321"
+  excepted:
+    status: 200
+    code: 500
+    msg_contains: "密码错误"
+
+empty_username:
+  description: "用户名为空"
+  body:
+    username: ""
+    password: "admin123"
+
+empty_password:
+  description: "密码为空"
+  body:
+    username: "admin"
+    password: ""
+
+empty_both:
+  description: "用户名和密码都为空"
+  body:
+    username: ""
+    password: ""
+
