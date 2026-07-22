@@ -20,12 +20,12 @@ from common.base_api import BaseApi
 def base_api():
     """
         session 级别 fixture：整个测试过程只登录一次
-        """
+    """
     api = BaseApi()
     token = api.login()
 
     assert token is not None, (
-        "❌ 登录失败！请检查：\n"
+        " ❌ 登录失败！请检查：\n"
         "  1. RuoYi 服务是否已启动（http://localhost:8080）\n"
         "  2. config.yaml 中的 base_url 和账号密码\n"
         "  3. 登录接口路径是否为 /login"
@@ -58,6 +58,12 @@ def cleanup_ids(base_api):
             elif resource_type == "role":
                 base_api.delete(f"/system/role/{resource_id}")
                 logger.info(f"[清理] 删除角色：{resource_id}")
+            elif resource_type == "menu":
+                base_api.delete(f"/system/menu/{resource_id}")
+                logger.info(f"[清理] 删除菜单：{resource_id}")
+            elif resource_type == "dept":
+                base_api.delete(f"/system/dept/{resource_id}")
+                logger.info(f"[清理] 删除部门：{resource_id}")
         except Exception as e:
             logger.error(f"[清理失败] {resource_type} {resource_id}：{e}")
 

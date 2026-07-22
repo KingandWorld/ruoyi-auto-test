@@ -1,0 +1,19 @@
+list_dept:
+  expected:
+    code: 200
+    msg: "操作成功"
+
+create_dept:
+  expected:
+    code: 200
+    msg: "操作成功"
+
+update_dept:
+  expected:
+    code: 200
+    msg: "操作成功"
+
+delete_dept:
+  expected:
+    code: 200
+    msg: "操作成功"
