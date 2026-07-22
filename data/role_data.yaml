@@ -1,0 +1,22 @@
+list_role:
+  params:
+    pageNum: 1
+    pageSize: 10
+  expected:
+    code: 200
+    msg: "操作成功"
+
+create_role:
+  expected:
+    code: 200
+    msg: "操作成功"
+
+update_role:
+  expected:
+    code: 200
+    msg: "操作成功"
+
+delete_role:
+  expected:
+    code: 200
+    msg: "操作成功"
