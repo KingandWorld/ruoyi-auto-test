@@ -13,6 +13,9 @@ from pathlib import Path
 REPORT_DIR = Path(__file__).parent / "reports"
 HTML_DIR = REPORT_DIR / "html"
 
+# Allure 命令行路径（如果不在系统 PATH 上，需指定完整路径）
+ALLURE_CMD = r"C:\xunlei_download\allure-2.43.0\bin\allure.bat"
+
 
 def run_tests():
     """执行所有测试用例，输出 Allure JSON 结果"""
@@ -33,7 +36,7 @@ def generate_report():
     """将 Allure JSON 结果编译为 HTML 报告"""
     print("\n📊 生成 Allure 报告...")
     subprocess.run([
-        "allure", "generate", str(REPORT_DIR),
+        ALLURE_CMD, "generate", str(REPORT_DIR),
         "-o", str(HTML_DIR),
         "--clean",
     ], check=True)
@@ -43,7 +46,7 @@ def generate_report():
 def open_report():
     """打开 Allure 报告"""
     print("\n🌐 打开 Allure 报告...")
-    subprocess.run(["allure", "open", str(HTML_DIR)])
+    subprocess.run([ALLURE_CMD, "open", str(HTML_DIR)])
 
 
 if __name__ == "__main__":
