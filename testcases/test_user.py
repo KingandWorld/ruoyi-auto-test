@@ -72,8 +72,9 @@ class TestUserManager:
         })
         assert create_resp.json()["code"] == 200, "创建用户失败，无法测试删除"
 
-        # 从列表查询 userId（创建响应不返回 userId）
-        list_resp = base_api.get("/system/user/list", params=td["list_user"]["params"])
+        # 从列表查询 userId（按用户名过滤避免分页问题）
+        list_params = {**td["list_user"]["params"], "userName": user_name}
+        list_resp = base_api.get("/system/user/list", params=list_params)
         rows = list_resp.json()["rows"]
         target = next((u for u in rows if u["userName"] == user_name), None)
         assert target is not None, "创建后未在列表中查到该用户"
@@ -126,8 +127,9 @@ class TestUserManager:
         create_resp = base_api.post("/system/user", json=body)
         assert create_resp.json()["code"] == 200
 
-        # 从列表获取完整用户对象（含 dept 等嵌套结构，PUT 需要）
-        list_resp = base_api.get("/system/user/list", params=td["list_user"]["params"])
+        # 从列表获取完整用户对象（按用户名过滤避免分页问题）
+        list_params = {**td["list_user"]["params"], "userName": body["userName"]}
+        list_resp = base_api.get("/system/user/list", params=list_params)
         rows = list_resp.json()["rows"]
         target = next((u for u in rows if u["userName"] == body["userName"]), None)
         assert target is not None, "创建用户后未在列表中查到"
